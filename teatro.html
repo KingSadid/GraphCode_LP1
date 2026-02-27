@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GraphCode Teatro - Experiencia cinematográfica inmersiva">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%236366f1' rx='15' width='100' height='100'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' fill='white' font-size='50' font-weight='bold'>G</text></svg>">
+
+  <title>Teatro - GraphCode</title>
+</head>
+
+<body>
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-logo">GraphCode</div>
+    <div class="loading-bar">
+      <div class="loading-progress"></div>
+    </div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div class="custom-cursor" id="customCursor"></div>
+  <div class="custom-cursor-dot" id="customCursorDot"></div>
+
+  <!-- Three.js Canvas Container -->
+  <div id="three-canvas-container"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container navbar-inner">
+      <a href="index.html" class="logo">
+        <img src="assets/images/logo.png" alt="GraphCode" class="navbar-logo">
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Inicio</a></li>
+        <li><a href="productos.html" class="nav-link">Productos</a></li>
+        <li><a href="fundadores.html" class="nav-link">Fundadores</a></li>
+        <li><a href="teatro.html" class="nav-link active">Teatro</a></li>
+        <li><a href="redes.html" class="nav-link">Redes</a></li>
+        <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="section" style="padding-top: 120px;">
+    <div class="container">
+      <div class="text-center reveal">
+        <span class="hero-badge">Experiencia Inmersiva</span>
+        <h1 style="margin-top: var(--space-4);">El <span class="gradient-text">Teatro</span> Digital</h1>
+        <p style="max-width: 600px; margin: var(--space-4) auto 0;">
+          Sumérgete en nuestra sala de cine virtual donde la tecnología y el arte se fusionan.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3D Theater Experience -->
+  <section class="section">
+    <div class="container">
+      <div class="glass-card reveal" style="padding: var(--space-12); text-align: center;">
+        <div style="max-width: 800px; margin: 0 auto;">
+          <div
+            style="aspect-ratio: 16/9; background: linear-gradient(135deg, var(--color-bg-tertiary) 0%, var(--color-bg-primary) 100%); border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
+            <!-- Cinema Screen Effect -->
+            <div
+              style="position: absolute; inset: 20px; background: linear-gradient(180deg, #1a1a25 0%, #0f0f15 100%); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 60px rgba(99, 102, 241, 0.2), inset 0 0 30px rgba(0,0,0,0.5);">
+              <div style="text-align: center;">
+                <svg width="64" height="64" fill="none" stroke="var(--color-accent-primary)" stroke-width="1.5"
+                  viewBox="0 0 24 24" style="margin-bottom: var(--space-4); opacity: 0.7;">
+                  <rect x="2" y="2" width="20" height="20" rx="2.18" />
+                  <path d="M7 2v20M17 2v20M2 12h20M2 7h5M2 17h5M17 17h5M17 7h5" />
+                </svg>
+                <p style="color: var(--color-text-muted); font-size: var(--font-size-sm);">Experiencia 3D próximamente
+                </p>
+              </div>
+            </div>
+
+            <!-- Decorative Elements -->
+            <div
+              style="position: absolute; bottom: 0; left: 0; right: 0; height: 40px; background: linear-gradient(transparent, rgba(0,0,0,0.5));">
+            </div>
+          </div>
+
+          <!-- Seats Animation -->
+          <div style="margin-top: var(--space-6); display: flex; justify-content: center; gap: 4px;">
+            <div style="display: flex; gap: 4px;">
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+            </div>
+          </div>
+          <div style="margin-top: 4px; display: flex; justify-content: center; gap: 4px;">
+            <div style="display: flex; gap: 4px;">
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+            </div>
+          </div>
+          <div style="margin-top: 4px; display: flex; justify-content: center; gap: 4px;">
+            <div style="display: flex; gap: 4px;">
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: var(--space-8);">
+          <h3>Teatro Virtual GraphCode</h3>
+          <p style="max-width: 500px; margin: var(--space-4) auto;">Experimenta nuestras producciones audiovisuales en
+            un entorno cinematográfico único.</p>
+          <a href="productos.html" class="btn btn-primary magnetic-btn" style="margin-top: var(--space-4);">
+            <span class="magnetic-btn-content">Ver Producciones</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="section" style="background: var(--color-bg-secondary);">
+    <div class="container">
+      <h2 class="text-center reveal" style="margin-bottom: var(--space-12);">Características <span
+          class="gradient-text">Técnicas</span></h2>
+
+      <div class="team-grid stagger-children">
+        <div class="glass-card text-center">
+          <div
+            style="width: 60px; height: 60px; margin: 0 auto var(--space-4); background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center;">
+            <svg width="28" height="28" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+            </svg>
+          </div>
+          <h4>WebGL Avanzado</h4>
+          <p style="margin-top: var(--space-2);">Renderizado 3D en tiempo real con shaders personalizados y efectos
+            visuales de alto rendimiento.</p>
+        </div>
+
+        <div class="glass-card text-center">
+          <div
+            style="width: 60px; height: 60px; margin: 0 auto var(--space-4); background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center;">
+            <svg width="28" height="28" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+          </div>
+          <h4>Audio Espacial</h4>
+          <p style="margin-top: var(--space-2);">Sistema de audio 3D que envuelve al espectador para una experiencia
+            inmersiva completa.</p>
+        </div>
+
+        <div class="glass-card text-center">
+          <div
+            style="width: 60px; height: 60px; margin: 0 auto var(--space-4); background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center;">
+            <svg width="28" height="28" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h4>Streaming 4K</h4>
+          <p style="margin-top: var(--space-2);">Reproducción de video en ultra alta definición con carga adaptativa
+            según la conexión.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <img src="assets/images/logo.png" alt="GraphCode" class="footer-logo">
+          </a>
+          <p>Transformando el futuro digital con innovación y creatividad.</p>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Navegación</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="fundadores.html">Fundadores</a></li>
+            <li><a href="teatro.html">Teatro</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Recursos</h4>
+          <ul class="footer-links">
+            <li><a href="redes.html">Redes Sociales</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Legal</h4>
+          <ul class="footer-links">
+            <li><a href="#">Privacidad</a></li>
+            <li><a href="#">Términos</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 GraphCode. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/three-scene.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>

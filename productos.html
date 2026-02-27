@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GraphCode Productos - Explora nuestro catálogo de soluciones digitales">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%236366f1' rx='15' width='100' height='100'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' fill='white' font-size='50' font-weight='bold'>G</text></svg>">
+
+  <title>Productos - GraphCode</title>
+</head>
+
+<body>
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-logo">GraphCode</div>
+    <div class="loading-bar">
+      <div class="loading-progress"></div>
+    </div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div class="custom-cursor" id="customCursor"></div>
+  <div class="custom-cursor-dot" id="customCursorDot"></div>
+
+  <!-- Three.js Canvas Container -->
+  <div id="three-canvas-container"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container navbar-inner">
+      <a href="index.html" class="logo">
+        <img src="assets/images/logo.png" alt="GraphCode" class="navbar-logo">
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Inicio</a></li>
+        <li><a href="productos.html" class="nav-link active">Productos</a></li>
+        <li><a href="fundadores.html" class="nav-link">Fundadores</a></li>
+        <li><a href="teatro.html" class="nav-link">Teatro</a></li>
+        <li><a href="redes.html" class="nav-link">Redes</a></li>
+        <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="section" style="padding-top: 120px;">
+    <div class="container">
+      <div class="text-center reveal">
+        <span class="hero-badge">Portafolio Digital</span>
+        <h1 style="margin-top: var(--space-4);">Nuestros <span class="gradient-text">Productos</span></h1>
+        <p style="max-width: 600px; margin: var(--space-4) auto 0;">
+          Descubre las soluciones innovadoras que hemos desarrollado. Cada proyecto representa nuestra pasión por la
+          excelencia.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cinema Section with Video and PDF Cards -->
+  <section class="cinema-section">
+    <div class="container">
+      <!-- Cinema Button -->
+      <div class="text-center reveal" style="margin-bottom: var(--space-10);">
+        <button class="btn btn-primary magnetic-btn" id="showCinemaBtn">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+            style="margin-right: 8px;">
+            <rect x="2" y="2" width="20" height="20" rx="2.18" />
+            <path d="M7 2v20M17 2v20M2 12h20M2 7h5M2 17h5M17 17h5M17 7h5" />
+          </svg>
+          <span class="magnetic-btn-content">Ver Sala de Cine</span>
+        </button>
+      </div>
+
+      <!-- Cinema Container (Hidden by default) -->
+      <div class="cinema-container" id="cinemaContainer"
+        style="display: none; opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);">
+        <!-- Cinema Screen -->
+        <div class="cinema-frame">
+          <div class="cinema-screen" id="cinemaScreen">
+            <!-- Video Element -->
+            <video id="cinemaVideo" poster="assets/videos/poster.jpg" preload="metadata">
+              <source src="assets/videos/VideoSultex.mp4" type="video/mp4">
+              Tu navegador no soporta la reproducción de video.
+            </video>
+
+            <!-- Video Controls -->
+            <div class="cinema-controls" id="cinemaControls">
+              <button class="cinema-btn" id="playPauseBtn" aria-label="Play/Pause">
+                <svg id="playIcon" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                  <polygon points="5,3 19,12 5,21" />
+                </svg>
+                <svg id="pauseIcon" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"
+                  style="display: none;">
+                  <rect x="6" y="4" width="4" height="16" />
+                  <rect x="14" y="4" width="4" height="16" />
+                </svg>
+              </button>
+
+              <div class="cinema-progress" id="progressContainer">
+                <div class="cinema-progress-bar" id="progressBar"></div>
+              </div>
+
+              <span id="timeDisplay"
+                style="font-size: 12px; color: rgba(255,255,255,0.8); min-width: 80px; text-align: center;">0:00 /
+                0:00</span>
+
+              <button class="cinema-btn" id="muteBtn" aria-label="Mute/Unmute">
+                <svg id="volumeIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24">
+                  <polygon points="11,5 6,9 2,9 2,15 6,15 11,19" />
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+                </svg>
+                <svg id="muteIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24" style="display: none;">
+                  <polygon points="11,5 6,9 2,9 2,15 6,15 11,19" />
+                  <line x1="23" y1="9" x2="17" y2="15" />
+                  <line x1="17" y1="9" x2="23" y2="15" />
+                </svg>
+              </button>
+
+              <button class="cinema-btn" id="fullscreenBtn" aria-label="Fullscreen">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path
+                    d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+                </svg>
+              </button>
+            </div>
+
+            <!-- Play Button Overlay -->
+            <div class="cinema-play-overlay" id="playOverlay"
+              style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); cursor: pointer; transition: opacity 0.3s;">
+              <div
+                style="width: 80px; height: 80px; background: var(--color-accent-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-glow-intense); transition: transform 0.3s;">
+                <svg width="32" height="32" fill="white" viewBox="0 0 24 24" style="margin-left: 4px;">
+                  <polygon points="5,3 19,12 5,21" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cinema Seats -->
+          <div class="cinema-seats">
+            <div class="cinema-seat-row">
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+            </div>
+            <div class="cinema-seat-row" style="margin-left: 10px;">
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+            </div>
+            <div class="cinema-seat-row" style="margin-left: 20px;">
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+              <div class="cinema-seat"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PDF Cards Sidebar -->
+        <div class="pdf-cards">
+          <h3 style="margin-bottom: var(--space-4);">Documentación del Proyecto</h3>
+
+          <!-- PDF Card 1: Guión Literario -->
+          <div class="pdf-card" data-pdf="assets/pdfs/Sultex_GuionLiterario.pdf" data-title="Guión Literario - Sultex">
+            <div class="pdf-card-header">
+              <div class="pdf-icon"></div>
+              <div class="pdf-info">
+                <h4 class="pdf-title">Guión Literario</h4>
+                <span class="pdf-meta">Sultex Production</span>
+              </div>
+            </div>
+
+            <div class="pdf-preview">
+              <div class="pdf-preview-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14,2 14,8 20,8" />
+                  <line x1="16" y1="13" x2="8" y2="13" />
+                  <line x1="16" y1="17" x2="8" y2="17" />
+                  <polyline points="10,9 9,9 8,9" />
+                </svg>
+                <span style="font-size: 12px;">Vista previa del documento</span>
+              </div>
+            </div>
+
+            <div class="pdf-actions">
+              <button class="pdf-action-btn preview-pdf-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+                Ver
+              </button>
+              <button class="pdf-action-btn download-pdf-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7,10 12,15 17,10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                Descargar
+              </button>
+            </div>
+          </div>
+
+          <!-- PDF Card 2: Guión Técnico -->
+          <div class="pdf-card" data-pdf="assets/pdfs/Sultex_GuionTécnico.pdf" data-title="Guión Técnico - Sultex">
+            <div class="pdf-card-header">
+              <div class="pdf-icon"></div>
+              <div class="pdf-info">
+                <h4 class="pdf-title">Guión Técnico</h4>
+                <span class="pdf-meta">Sultex Production</span>
+              </div>
+            </div>
+
+            <div class="pdf-preview">
+              <div class="pdf-preview-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14,2 14,8 20,8" />
+                  <line x1="16" y1="13" x2="8" y2="13" />
+                  <line x1="16" y1="17" x2="8" y2="17" />
+                  <polyline points="10,9 9,9 8,9" />
+                </svg>
+                <span style="font-size: 12px;">Vista previa del documento</span>
+              </div>
+            </div>
+
+            <div class="pdf-actions">
+              <button class="pdf-action-btn preview-pdf-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+                Ver
+              </button>
+              <button class="pdf-action-btn download-pdf-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7,10 12,15 17,10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                Descargar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PDF Modal -->
+  <div class="pdf-modal" id="pdfModal">
+    <div class="pdf-modal-backdrop" id="pdfModalBackdrop"></div>
+    <div class="pdf-modal-content">
+      <div class="pdf-modal-header">
+        <h4 class="pdf-modal-title" id="pdfModalTitle">Documento PDF</h4>
+        <button class="pdf-modal-close" id="pdfModalClose" aria-label="Cerrar">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+      <div class="pdf-modal-body">
+        <iframe id="pdfViewer" src="" title="PDF Viewer"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Products Grid Section -->
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center reveal" style="margin-bottom: var(--space-12);">Más <span
+          class="gradient-text">Proyectos</span></h2>
+
+      <div class="team-grid stagger-children">
+        <div class="glass-card" style="cursor: pointer;">
+          <div
+            style="aspect-ratio: 16/9; background: linear-gradient(135deg, var(--color-bg-tertiary) 0%, var(--color-bg-secondary) 100%); border-radius: var(--radius-lg); margin-bottom: var(--space-4); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+            <svg width="48" height="48" fill="none" stroke="var(--color-accent-primary)" stroke-width="1.5"
+              viewBox="0 0 24 24">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <path d="M8 21h8M12 17v4" />
+            </svg>
+          </div>
+          <h4>Aplicación Web Interactiva</h4>
+          <p style="margin-top: var(--space-2); font-size: var(--font-size-sm);">Dashboard analítico con visualizaciones
+            en tiempo real y gráficos interactivos.</p>
+          <div style="display: flex; gap: var(--space-2); margin-top: var(--space-4); flex-wrap: wrap;">
+            <span
+              style="padding: 4px 12px; background: rgba(99, 102, 241, 0.1); border-radius: var(--radius-full); font-size: 12px; color: var(--color-accent-primary);">React</span>
+            <span
+              style="padding: 4px 12px; background: rgba(99, 102, 241, 0.1); border-radius: var(--radius-full); font-size: 12px; color: var(--color-accent-primary);">D3.js</span>
+            <span
+              style="padding: 4px 12px; background: rgba(99, 102, 241, 0.1); border-radius: var(--radius-full); font-size: 12px; color: var(--color-accent-primary);">Node.js</span>
+          </div>
+        </div>
+
+        <div class="glass-card" style="cursor: pointer;">
+          <div
+            style="aspect-ratio: 16/9; background: linear-gradient(135deg, var(--color-bg-tertiary) 0%, var(--color-bg-secondary) 100%); border-radius: var(--radius-lg); margin-bottom: var(--space-4); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+            <svg width="48" height="48" fill="none" stroke="var(--color-accent-secondary)" stroke-width="1.5"
+              viewBox="0 0 24 24">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+            </svg>
+          </div>
+          <h4>Experiencia 3D Inmersiva</h4>
+          <p style="margin-top: var(--space-2); font-size: var(--font-size-sm);">Entorno virtual interactivo con físicas
+            realistas y renderizado avanzado.</p>
+          <div style="display: flex; gap: var(--space-2); margin-top: var(--space-4); flex-wrap: wrap;">
+            <span
+              style="padding: 4px 12px; background: rgba(139, 92, 246, 0.1); border-radius: var(--radius-full); font-size: 12px; color: var(--color-accent-secondary);">Three.js</span>
+            <span
+              style="padding: 4px 12px; background: rgba(139, 92, 246, 0.1); border-radius: var(--radius-full); font-size: 12px; color: var(--color-accent-secondary);">WebGL</span>
+            <span
+              style="padding: 4px 12px; background: rgba(139, 92, 246, 0.1); border-radius: var(--radius-full); font-size: 12px; color: var(--color-accent-secondary);">GLSL</span>
+          </div>
+        </div>
+
+        <div class="glass-card" style="cursor: pointer;">
+          <div
+            style="aspect-ratio: 16/9; background: linear-gradient(135deg, var(--color-bg-tertiary) 0%, var(--color-bg-secondary) 100%); border-radius: var(--radius-lg); margin-bottom: var(--space-4); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+            <svg width="48" height="48" fill="none" stroke="#ec4899" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M23 7l-7 5 7 5V7zM14 5H3a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2z" />
+            </svg>
+          </div>
+          <h4>Producción Audiovisual</h4>
+          <p style="margin-top: var(--space-2); font-size: var(--font-size-sm);">Video corporativo con motion graphics y
+            efectos visuales cinematográficos.</p>
+          <div style="display: flex; gap: var(--space-2); margin-top: var(--space-4); flex-wrap: wrap;">
+            <span
+              style="padding: 4px 12px; background: rgba(236, 72, 153, 0.1); border-radius: var(--radius-full); font-size: 12px; color: #ec4899;">After
+              Effects</span>
+            <span
+              style="padding: 4px 12px; background: rgba(236, 72, 153, 0.1); border-radius: var(--radius-full); font-size: 12px; color: #ec4899;">Premiere</span>
+            <span
+              style="padding: 4px 12px; background: rgba(236, 72, 153, 0.1); border-radius: var(--radius-full); font-size: 12px; color: #ec4899;">Cinema
+              4D</span>
+          </div>
+        </div>
+
+        <div class="glass-card" style="cursor: pointer;">
+          <div
+            style="aspect-ratio: 16/9; background: linear-gradient(135deg, var(--color-bg-tertiary) 0%, var(--color-bg-secondary) 100%); border-radius: var(--radius-lg); margin-bottom: var(--space-4); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+            <svg width="48" height="48" fill="none" stroke="#10b981" stroke-width="1.5" viewBox="0 0 24 24">
+              <rect x="5" y="2" width="14" height="20" rx="2" />
+              <path d="M12 18h.01" />
+            </svg>
+          </div>
+          <h4>App Móvil Multiplataforma</h4>
+          <p style="margin-top: var(--space-2); font-size: var(--font-size-sm);">Aplicación nativa con sincronización en
+            la nube y notificaciones push.</p>
+          <div style="display: flex; gap: var(--space-2); margin-top: var(--space-4); flex-wrap: wrap;">
+            <span
+              style="padding: 4px 12px; background: rgba(16, 185, 129, 0.1); border-radius: var(--radius-full); font-size: 12px; color: #10b981;">Flutter</span>
+            <span
+              style="padding: 4px 12px; background: rgba(16, 185, 129, 0.1); border-radius: var(--radius-full); font-size: 12px; color: #10b981;">Firebase</span>
+            <span
+              style="padding: 4px 12px; background: rgba(16, 185, 129, 0.1); border-radius: var(--radius-full); font-size: 12px; color: #10b981;">Dart</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <img src="assets/images/logo.png" alt="GraphCode" class="footer-logo">
+          </a>
+          <p>Transformando el futuro digital con innovación y creatividad.</p>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Navegación</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="fundadores.html">Fundadores</a></li>
+            <li><a href="teatro.html">Teatro</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Recursos</h4>
+          <ul class="footer-links">
+            <li><a href="redes.html">Redes Sociales</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Legal</h4>
+          <ul class="footer-links">
+            <li><a href="#">Privacidad</a></li>
+            <li><a href="#">Términos</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 GraphCode. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/three-scene.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/theater.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
