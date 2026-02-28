@@ -443,6 +443,15 @@ a:hover {
   margin: 0 auto var(--space-10);
 }
 
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: var(--font-size-4xl);
+  }
+  .hero-subtitle {
+    font-size: var(--font-size-lg);
+  }
+}
+
 .hero-cta {
   display: flex;
   gap: var(--space-4);
